@@ -9,18 +9,22 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <div id="left-panel" class="col-xs-12 col-sm-9 col-md-8">
+                <div id="left-panel" class="col-xs-12 col-sm-7 col-md-8">
                     <div class="cover-image"></div>
+                    <div class="cover-image-text hidden">
+                        <h1>Bangabdi Roy Chowdhury</h1>
+                        <p>Social Media Manager, Growth Hacker, and Content Curator in Bengaluru, India</p>
+                    </div>
                 </div>
-                <div class="col-xs-12 col-sm-3 col-md-4">
+                <div id="right-panel" class="col-xs-12 col-sm-5 col-md-4">
                     <div class="site-header">
                         <h1>Bangabdi Roy Chowdhury</h1>
                         <p>Social Media Manager, Growth Hacker, and Content Curator in Bengaluru, India</p>
+                    </div>
 
-                        <div class="cta">
+                    <div class="cta">
                             <a href="http://blog.simirc.xyz/" target="_blank" rel="noopener noreferrer" class="spotlight button large dark glyph-article" style="background-color:rgb(48,35,174);color:#fff;font-weight:bold;" data-reactid="58">Read my blog</a>
                         </div>
-                    </div>
 
                     <div class="site-body">
                         <p>Hey there, I'm Bangabdi. I'm a Growth Hacker living in Bengaluru, India. I am a fan of dance, writing, and fashion. I'm also interested in politics, economics and travel. You can read my blog with a click on the button above.</p>
@@ -39,7 +43,38 @@
             $(window).resize(onResize);
         });
         var onResize = function () {
-            $('#left-panel').height($(window).height());
+            var window_height = $(window).height();
+            var window_width = $(window).width();
+            var mobile_max_width = 768;
+
+            var top_cover_height = window_height;
+
+            if (window_width < mobile_max_width ) {
+                // For mobile views
+                top_cover_height /= 2;
+            }
+
+            if (top_cover_height < 200) {
+                top_cover_height = 200;
+            }
+
+            $('#left-panel').height(top_cover_height);
+
+            var left_panel_width = $('#left-panel').width();
+            var left_panel_height = $('#left-panel').height();
+            if (window_width < mobile_max_width ) {
+                // Mobile view
+                $('#left-panel').width($(document).width());
+                $('#right-panel').css('top', left_panel_height);
+            } else {
+                // Desktop view
+                var right_panel_content_height = $('#right-panel').height();
+                var padding_above_right_panel = (window_height - right_panel_content_height) / 4;
+                $('#right-panel').css('padding-top', padding_above_right_panel);
+
+                $('#right-panel').css('left', left_panel_width);
+            }
+
         }
         </script>
     </body>
